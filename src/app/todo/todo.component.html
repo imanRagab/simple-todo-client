@@ -1,3 +1,32 @@
-<p>
-  todo works!
-</p>
+<mat-toolbar class="toolbar">
+  <span>My Application</span>
+  <span></span>
+  <button mat-fab>  
+      <mat-icon>add</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-content>
+    <mat-selection-list #list>
+      <mat-list-option 
+      ngDefaultControl
+      [attr.class]="todo.state?'todo':''" 
+      *ngFor="let todo of todos; let i = index"
+      (click)="changeState(i)"
+      [selected]="todo.state" 
+      >
+        <h3 matLine > {{ todo?.title }} </h3>
+        <p matLine> {{ todo?.description }} </p>
+        <p matLine> {{ todo?.deadline }} </p>
+        <button mat-icon-button>
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+        <mat-divider></mat-divider>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>

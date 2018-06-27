@@ -26,16 +26,14 @@ export class ApiService {
   // make api post request 
   post(path: string, body: Object = {}): Observable<any> {
     return this.http.post(
-      `${environment.api_host}${path}`,
-      JSON.stringify(body)
+      `${environment.api_host}${path}`, body
     ).pipe(catchError(this.formatErrors));
   }
 
   // make api put request 
   put(path: string, body: Object = {}): Observable<any> {
     return this.http.put(
-      `${environment.api_host}${path}`,
-      JSON.stringify(body)
+      `${environment.api_host}${path}`, body
     ).pipe(catchError(this.formatErrors));
   }
 

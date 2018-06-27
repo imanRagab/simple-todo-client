@@ -31,7 +31,7 @@ export class TodoService {
 
   // update todo
   updateTodo(todo :object): Observable<object> {
-    const route = `/api/todos/${todo['id']}`;
+    const route = `/api/todos/${todo['_id']}`;
     return this.apiService.put(route, todo);
   }
 
