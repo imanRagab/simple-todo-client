@@ -68,7 +68,26 @@ export class TodoComponent implements OnInit {
     this.todoService.createTodo(todo).subscribe(
       result => {
         this.todos.unshift(result['data']);
+      },
+      error => {
+        console.log(error)
       }
     );
+  }
+
+  // delete todo 
+  deleteTodo(index) {
+    
+    const todo = this.todos[index];
+    if(confirm('Delete this todo ?')){
+      this.todoService.deleteTodo(todo['_id']).subscribe(
+        result => {
+          this.todos.splice(index, 1);
+        },
+        error => {
+          console.log(error)
+        }
+      );
+    }
   }
 }

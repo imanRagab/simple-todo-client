@@ -1,34 +1,43 @@
 <mat-toolbar class="toolbar">
-  <mat-icon style="color: rgb(250, 154, 154);">done_all</mat-icon>
+  <mat-icon color="accent">done_all</mat-icon>
   <h1>ToDoIt</h1>
   <span></span>
   <button mat-fab mat-raised-button (click)="openDialog()">  
-      <mat-icon>add</mat-icon>
+      <mat-icon>note_add</mat-icon>
     </button>
 </mat-toolbar>
 
 <mat-card>
   <mat-card-content>
-    <mat-selection-list #list>
-      <mat-list-option 
-      ngDefaultControl
-      [attr.class]="todo.state?'todo':''" 
-      *ngFor="let todo of todos; let i = index"
-      (click)="changeState(i)"
-      [selected]="todo.state" 
-      >
-        <h3 matLine > {{ todo?.title }} </h3>
-        <p matLine> {{ todo?.description }} </p>
-        <p matLine> {{ todo?.deadline | date }} </p>
-        <button mat-icon-button>
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-        <button mat-icon-button>
-          <mat-icon>mode_edit</mat-icon>
-        </button>
-        <mat-divider></mat-divider>
-        <br><br>
-      </mat-list-option>
-    </mat-selection-list>
+    <div *ngIf="todos.length > 0">
+      <mat-selection-list #list>
+        <mat-list-option 
+        ngDefaultControl
+        [attr.class]="todo.state?'todo':''" 
+        *ngFor="let todo of todos; let i = index"
+        (click)="changeState(i)"
+        [selected]="todo.state" 
+        >
+          <h3 matLine > {{ todo?.title }} </h3>
+          <p matLine> {{ todo?.description }} </p>
+          <p matLine> {{ todo?.deadline | date }} </p>
+          <button mat-icon-button (click)="deleteTodo(i)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+          <mat-divider></mat-divider>
+          <br><br>
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+    <div *ngIf="todos.length == 0">
+      <h2>
+        No todos added yet. Add one to strat working
+        <mat-icon>work</mat-icon>
+        <mat-icon>mood</mat-icon>
+      </h2>
+    </div>
   </mat-card-content>
 </mat-card>
