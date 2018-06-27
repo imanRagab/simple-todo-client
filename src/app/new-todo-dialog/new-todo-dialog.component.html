@@ -1,0 +1,30 @@
+<mat-toolbar class="toolbar" color="accent">
+  <h2 md-dialog-title>New Todo</h2>
+  <span></span>
+  <button mat-icon-button>
+      <mat-icon (click)="onCloseCancel()">close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-dialog-content>
+  <form>
+    <mat-form-field>
+        <input matInput placeholder="title" [(ngModel)]="data.title" name="title">
+    </mat-form-field> 
+    <br> 
+    <mat-form-field>
+      <textarea matInput placeholder="description" [(ngModel)]="data.description" name="description"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date"  [(ngModel)]="data.deadline" name="deadline">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions class="toolbar">
+  <span></span>
+  <button mat-raised-button color="accent" (click)="onCloseConfirm()">ADD</button>&nbsp;
+</mat-dialog-actions>

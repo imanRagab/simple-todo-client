@@ -12,15 +12,22 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material'
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
+import { NewTodoDialogComponent } from './new-todo-dialog/new-todo-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoComponent,
+    NewTodoDialogComponent,
   ],
+  entryComponents: [NewTodoDialogComponent,],
   imports: [
     BrowserModule,
     FormsModule,
@@ -31,7 +38,11 @@ import { TodoComponent } from './todo/todo.component';
     MatToolbarModule,
     MatDialogModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    BrowserAnimationsModule
   ],
   providers: [
     HttpClient
