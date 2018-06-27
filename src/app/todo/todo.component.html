@@ -19,7 +19,7 @@
       >
         <h3 matLine > {{ todo?.title }} </h3>
         <p matLine> {{ todo?.description }} </p>
-        <p matLine> {{ todo?.deadline }} </p>
+        <p matLine> {{ todo?.deadline | date }} </p>
         <button mat-icon-button>
           <mat-icon>delete_forever</mat-icon>
         </button>

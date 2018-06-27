@@ -24,6 +24,7 @@ export class TodoComponent implements OnInit {
     this.getTodosList();
   }
 
+  // get list of saved todos
   getTodosList() {
 
     this.todoService.getTodosList().subscribe(
@@ -46,18 +47,28 @@ export class TodoComponent implements OnInit {
   }
 
   
- // open new todo dialog
- openDialog(todo = {}) {
-  this.todo = todo;
-  this.todo['state'] = 0;
-  let dialogRef = this.newTodoDialog.open(NewTodoDialogComponent, {
-    width: '400px',
-    data: this.todo
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog closed: ${result}`);
-    // this.dialogResult = result;
-    console.log(this.todo)
-  });
-}
+  // open new todo dialog
+  openDialog(todo = {}) {
+    this.todo = todo;
+    this.todo['state'] = false;
+    let dialogRef = this.newTodoDialog.open(NewTodoDialogComponent, {
+      width: '400px',
+      data: this.todo
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if(result == "Confirm") {
+        this.addTodo(this.todo);
+      }
+    });
+  }
+
+  // add new todo
+  addTodo(todo) {
+    this.todoService.createTodo(todo).subscribe(
+      result => {
+        this.todos.unshift(result['data']);
+      }
+    );
+  }
 }
