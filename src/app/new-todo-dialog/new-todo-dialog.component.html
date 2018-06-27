@@ -9,15 +9,15 @@
 <mat-dialog-content>
   <form>
     <mat-form-field>
-        <input matInput placeholder="title" [(ngModel)]="data.title" name="title">
+        <input matInput placeholder="title" [(ngModel)]="data.todo.title" name="title" required>
     </mat-form-field> 
     <br> 
     <mat-form-field>
-      <textarea matInput placeholder="description" [(ngModel)]="data.description" name="description"></textarea>
+      <textarea matInput placeholder="description" [(ngModel)]="data.todo.description" name="description" required></textarea>
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date"  [(ngModel)]="data.deadline" name="deadline">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date"  [(ngModel)]="data.todo.deadline" name="deadline" required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -26,5 +26,8 @@
 <hr>
 <mat-dialog-actions class="toolbar">
   <span></span>
-  <button mat-raised-button color="accent" (click)="onCloseConfirm()">ADD</button>&nbsp;
+  <button mat-raised-button color="accent" (click)="onCloseConfirm()" >
+    <span *ngIf="data.mode=='create'">ADD</span>
+    <span *ngIf="data.mode=='edit'">Save</span>
+  </button>&nbsp;
 </mat-dialog-actions>

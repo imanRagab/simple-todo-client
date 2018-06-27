@@ -48,17 +48,23 @@ export class TodoComponent implements OnInit {
 
   
   // open new todo dialog
-  openDialog(todo = {}) {
+  openDialog(todo = {}, index = 0) {
     this.todo = todo;
+    let mode = 'create';
+    if(todo['title']) {
+      mode = 'edit';
+    }
     this.todo['state'] = false;
     let dialogRef = this.newTodoDialog.open(NewTodoDialogComponent, {
       width: '400px',
-      data: this.todo
+      data: {todo: this.todo, mode: mode}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
       if(result == "Confirm") {
-        this.addTodo(this.todo);
+        if(mode == 'create')
+          this.addTodo(this.todo);
+        else 
+          this.editTodo(this.todo, index);
       }
     });
   }
@@ -75,9 +81,21 @@ export class TodoComponent implements OnInit {
     );
   }
 
+  // edit todo
+  editTodo(todo, index) {
+    this.todoService.updateTodo(todo).subscribe(
+      result => {
+        this.todos[index] = (result['data']);
+      },
+      error => {
+        console.log(error)
+      }
+    );
+  }
+
   // delete todo 
   deleteTodo(index) {
-    
+
     const todo = this.todos[index];
     if(confirm('Delete this todo ?')){
       this.todoService.deleteTodo(todo['_id']).subscribe(
